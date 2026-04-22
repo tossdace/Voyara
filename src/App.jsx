@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
 
+// ─── Color System ──────────────────────────────────────────────────────────
+const colors = {
+  primary: "#2d6a4f",
+  accent: "#52b788",
+  light: "#d8f3dc",
+  dark: "#1b4332",
+  highlight: "#74c69d",
+  neutral: "#f8f9fa",
+  text: "#212529"
+};
+
 // ─── Fonts (injected via style tag) ────────────────────────────────────────
 const FontStyle = () => (
   <style>{`
@@ -182,15 +193,15 @@ const Navbar = () => {
             </a>
           ))}
           <button style={{
-            background: "linear-gradient(135deg, #2d6a4f, #40916c)",
+            background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
             color: "white", border: "none", borderRadius: 99,
             padding: "10px 22px", fontSize: "0.875rem", fontWeight: 600,
             cursor: "pointer", letterSpacing: "0.02em",
-            boxShadow: "0 4px 14px rgba(45,106,79,0.35)",
+            boxShadow: `0 4px 14px ${colors.primary}59`,
             transition: "transform 0.2s, box-shadow 0.2s",
           }}
-            onMouseEnter={e => { e.target.style.transform = "scale(1.04)"; e.target.style.boxShadow = "0 6px 20px rgba(45,106,79,0.45)"; }}
-            onMouseLeave={e => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = "0 4px 14px rgba(45,106,79,0.35)"; }}
+            onMouseEnter={e => { e.target.style.transform = "scale(1.04)"; e.target.style.boxShadow = `0 6px 20px ${colors.primary}73`; }}
+            onMouseLeave={e => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = `0 4px 14px ${colors.primary}59`; }}
           >
             Start Exploring
           </button>
@@ -228,7 +239,7 @@ const Hero = () => (
     {/* Overlay */}
     <div style={{
       position: "absolute", inset: 0,
-      background: "linear-gradient(to bottom, rgba(5,20,12,0.35) 0%, rgba(5,20,12,0.65) 60%, rgba(5,20,12,0.82) 100%)",
+      background: "linear-gradient(135deg, rgba(27,67,50,0.6) 0%, rgba(45,106,79,0.7) 60%, rgba(82,183,136,0.5) 100%)",
     }} />
 
     {/* Grain texture */}
@@ -255,7 +266,7 @@ const Hero = () => (
         }}
       >
         Don't Just Visit.<br />
-        <em style={{ fontStyle: "italic", color: "var(--green-light)" }}>Experience It</em> With a Local.
+        <em style={{ fontStyle: "italic", color: colors.highlight }}>Experience It</em> With a Local.
       </h1>
 
       <p className="anim-fadeup delay-300" style={{
@@ -277,7 +288,7 @@ const Hero = () => (
             }
           }}
           style={{
-            background: "linear-gradient(135deg, #2d6a4f, #52b788)",
+            background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
             color: "white",
             border: "none",
             borderRadius: 99,
@@ -285,7 +296,7 @@ const Hero = () => (
             fontSize: "0.975rem",
             fontWeight: 600,
             cursor: "pointer",
-            boxShadow: "0 8px 28px rgba(45,106,79,0.55)",
+            boxShadow: `0 8px 25px ${colors.primary}66`,
             transition: "transform 0.2s",
           }}
           onMouseEnter={e => e.currentTarget.style.transform = "scale(1.04)"}
@@ -353,13 +364,13 @@ const ValueProp = () => {
   ];
 
   return (
-    <section style={{ background: "var(--cream)", padding: "7rem 2rem" }}>
+    <section style={{ background: "white", padding: "6rem 2rem" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <div className="section-line" />
           <h2 className="font-display" style={{
             fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 600,
-            color: "var(--green-deep)", letterSpacing: "-0.02em", marginBottom: "0.75rem",
+            color: colors.dark, letterSpacing: "-0.02em", marginBottom: "0.75rem",
           }}>
             Skip the Tourist Traps
           </h2>
@@ -376,9 +387,14 @@ const ValueProp = () => {
             <div key={i} className="card-hover" style={{
               background: "white", borderRadius: 20,
               padding: "2rem 1.75rem",
-              border: "1px solid rgba(45,106,79,0.08)",
-              boxShadow: "0 2px 16px rgba(26,60,46,0.06)",
-            }}>
+              border: "1px solid rgba(0,0,0,0.05)",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+              transform: "translateY(0)",
+              transition: "all 0.25s ease",
+            }}
+              onMouseEnter={e => e.currentTarget.style.transform = "translateY(-8px)"}
+              onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
+            >
               <div style={{
                 fontSize: "1.75rem", marginBottom: "1rem",
                 width: 52, height: 52, borderRadius: 14,
@@ -387,7 +403,7 @@ const ValueProp = () => {
               }}>
                 {f.icon}
               </div>
-              <h3 style={{ fontSize: "1.05rem", fontWeight: 600, color: "var(--green-deep)", marginBottom: "0.5rem" }}>{f.title}</h3>
+              <h3 style={{ fontWeight: 700, fontSize: "1.05rem", color: colors.text, marginBottom: "0.5rem" }}>{f.title}</h3>
               <p style={{ fontSize: "0.875rem", color: "var(--muted)", lineHeight: 1.75 }}>{f.desc}</p>
             </div>
           ))}
@@ -407,8 +423,8 @@ const HowItWorks = () => {
 
   return (
     <section style={{
-      background: "linear-gradient(160deg, var(--green-deep) 0%, #1e4d3a 100%)",
-      padding: "7rem 2rem",
+      background: `linear-gradient(180deg, ${colors.light} 0%, white 100%)`,
+      padding: "6rem 2rem",
       position: "relative", overflow: "hidden",
     }}>
       {/* Background decoration */}
@@ -427,8 +443,8 @@ const HowItWorks = () => {
         <div style={{ textAlign: "center", marginBottom: "4.5rem" }}>
           <div className="section-line" style={{ background: "linear-gradient(90deg, var(--green-light), var(--green-pale))" }} />
           <h2 className="font-display" style={{
-            fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 600,
-            color: "white", letterSpacing: "-0.02em", marginBottom: "0.75rem",
+            fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, letterSpacing: "-0.02em",
+            color: "white", marginBottom: "0.75rem",
           }}>
             How It Works
           </h2>
@@ -567,21 +583,22 @@ const ExplorePlaces = () => (
               </div>
             </div>
             <div style={{ padding: "1.5rem" }}>
-              <h3 className="font-display" style={{ fontSize: "1.45rem", fontWeight: 600, color: "var(--green-deep)", marginBottom: "0.5rem" }}>
+              <h3 className="font-display" style={{ fontSize: "1.45rem", fontWeight: 700, color: colors.dark, marginBottom: "0.5rem", letterSpacing: "-0.02em" }}>
                 {place.name}
               </h3>
               <p style={{ fontSize: "0.875rem", color: "var(--muted)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
                 {place.desc}
               </p>
-              <button style={{
-                width: "100%", background: "var(--green-pale)",
-                color: "var(--green-mid)", border: "none", borderRadius: 12,
-                padding: "12px", fontSize: "0.875rem", fontWeight: 600,
-                cursor: "pointer", transition: "background 0.2s, color 0.2s",
-              }}
-                onMouseEnter={e => { e.currentTarget.style.background = "var(--green-mid)"; e.currentTarget.style.color = "white"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "var(--green-pale)"; e.currentTarget.style.color = "var(--green-mid)"; }}
-              >
+            <button style={{
+              width: "100%", background: colors.primary,
+              color: "white", border: "none", borderRadius: 12,
+              padding: "12px", fontSize: "0.875rem", fontWeight: 600,
+              cursor: "pointer", transition: "background 0.2s, transform 0.2s",
+              transform: "scale(1)",
+            }}
+              onMouseEnter={e => { e.currentTarget.style.background = colors.accent; e.currentTarget.style.transform = "scale(1.02)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = colors.primary; e.currentTarget.style.transform = "scale(1)"; }}
+            >
                 Explore with Guide
               </button>
             </div>
@@ -632,8 +649,8 @@ const FeaturedGuides = ({ onBookNow }) => (
       <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
         <div className="section-line" />
         <h2 className="font-display" style={{
-          fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 600,
-          color: "var(--green-deep)", letterSpacing: "-0.02em", marginBottom: "0.75rem",
+          fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, letterSpacing: "-0.02em",
+          color: colors.dark, marginBottom: "0.75rem",
         }}>
           Meet Your Guides
         </h2>
@@ -650,9 +667,14 @@ const FeaturedGuides = ({ onBookNow }) => (
           <div key={i} className="card-hover" style={{
             background: "white", borderRadius: 24,
             padding: "2rem",
-            boxShadow: "0 2px 20px rgba(26,60,46,0.07)",
-            border: "1px solid rgba(45,106,79,0.08)",
-          }}>
+            boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+            border: "1px solid rgba(0,0,0,0.05)",
+            transform: "translateY(0)",
+            transition: "all 0.25s ease",
+          }}
+            onMouseEnter={e => e.currentTarget.style.transform = "translateY(-8px)"}
+            onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
+          >
             <div style={{ display: "flex", gap: "1rem", marginBottom: "1.25rem" }}>
               <div>
                 <h3 style={{ fontWeight: 600, fontSize: "1.05rem", color: "var(--charcoal)" }}>{g.name}</h3>
@@ -698,7 +720,7 @@ const FeaturedGuides = ({ onBookNow }) => (
               <button 
                 onClick={onBookNow}
               style={{
-                background: "linear-gradient(135deg, #2d6a4f, #40916c)",
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
                 color: "white",
                 border: "none",
                 borderRadius: 10,
@@ -706,7 +728,7 @@ const FeaturedGuides = ({ onBookNow }) => (
                 fontSize: "0.82rem",
                 fontWeight: 600,
                 cursor: "pointer",
-                boxShadow: "0 4px 12px rgba(45,106,79,0.3)",
+                boxShadow: `0 4px 12px ${colors.primary}4d`,
                  transition: "transform 0.2s",
               }}
                 onMouseEnter={e => e.currentTarget.style.transform = "scale(1.04)"}
@@ -732,7 +754,7 @@ const TrustSection = () => {
   ];
 
   return (
-    <section style={{ padding: "7rem 2rem", background: "white" }}>
+    <section style={{ padding: "6rem 2rem", background: "white" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{
           display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem",
@@ -742,22 +764,23 @@ const TrustSection = () => {
           <div>
             <div className="section-line" style={{ margin: "0 0 1.5rem" }} />
             <h2 className="font-display" style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 600,
-              color: "var(--green-deep)", letterSpacing: "-0.02em", marginBottom: "1rem",
+              fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "-0.02em",
+              color: colors.dark, marginBottom: "1rem",
             }}>
               Your Safety<br />Matters to Us
             </h2>
-            <p style={{ color: "var(--muted)", lineHeight: 1.8, marginBottom: "2rem", maxWidth: 380 }}>
+            <p style={{ color: colors.text, lineHeight: 1.8, marginBottom: "2rem", maxWidth: 380 }}>
               We don't just list guides — we vet them. Every person on Voyara has passed our safety checks, so you can focus on the experience.
             </p>
             <button style={{
-              background: "var(--green-deep)", color: "white",
+              background: colors.primary, color: "white",
               border: "none", borderRadius: 12, padding: "13px 26px",
               fontSize: "0.9rem", fontWeight: 600, cursor: "pointer",
-              transition: "background 0.2s",
+              transition: "all 0.2s",
+              transform: "scale(1)",
             }}
-              onMouseEnter={e => e.currentTarget.style.background = "var(--green-mid)"}
-              onMouseLeave={e => e.currentTarget.style.background = "var(--green-deep)"}
+              onMouseEnter={e => { e.currentTarget.style.background = colors.accent; e.currentTarget.style.transform = "scale(1.03)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = colors.primary; e.currentTarget.style.transform = "scale(1)"; }}
             >
               Learn about our safety process
             </button>
@@ -803,7 +826,7 @@ const FinalCTA = () => (
       position: "relative",
       overflow: "hidden",
       padding: "8rem 2rem",
-      background: "linear-gradient(135deg, var(--green-deep) 0%, #0d2b1f 100%)",
+      background: `linear-gradient(135deg, ${colors.dark} 0%, #0d2b1f 100%)`,
       textAlign: "center",
     }}
   >
@@ -860,7 +883,7 @@ const FinalCTA = () => (
       >
         Start Exploring Kerala
         <br />
-        <em style={{ color: "var(--green-light)", fontStyle: "italic" }}>
+        <em style={{ color: colors.highlight, fontStyle: "italic" }}>
           Like a Local
         </em>
       </h2>
@@ -897,7 +920,7 @@ const FinalCTA = () => (
             }
           }}
           style={{
-            background: "linear-gradient(135deg, #2d6a4f, #40916c)",
+            background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
             color: "white",
             border: "none",
             borderRadius: 99,
