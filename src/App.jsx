@@ -173,7 +173,7 @@ const Navbar = () => {
             color: scrolled ? "var(--green-deep)" : "white",
             transition: "color 0.3s",
           }}>
-            Voyara
+            Hirevoy
           </span>
         </div>
 
@@ -375,7 +375,7 @@ const ValueProp = () => {
             Skip the Tourist Traps
           </h2>
           <p style={{ color: "#555", maxWidth: 480, margin: "0 auto", lineHeight: 1.7 }}>
-            Real travel is messy, unplanned, and deeply human. Voyara connects you to people who live it every day.
+            Real travel is messy, unplanned, and deeply human. Hirevoy connects you to people who live it every day.
           </p>
         </div>
 
@@ -748,7 +748,7 @@ const FeaturedGuides = ({ onBookNow }) => (
 // ─── Trust Section ──────────────────────────────────────────────────────────
 const TrustSection = () => {
   const items = [
-    { icon: "🔍", title: "Background Verified", desc: "Every guide undergoes a thorough police verification and identity check before joining Voyara." },
+    { icon: "🔍", title: "Background Verified", desc: "Every guide undergoes a thorough police verification and identity check before joining Hirevoy." },
     { icon: "🪪", title: "ID Authenticated", desc: "Government-issued ID verification ensures you always know who's guiding you." },
     { icon: "🔐", title: "Secure Booking", desc: "SSL-encrypted payments, zero hidden fees, and instant refunds for cancellations." },
     { icon: "⭐", title: "Ratings & Reviews", desc: "Every booking results in a verified review. No fake ratings, no exceptions." },
@@ -771,7 +771,7 @@ const TrustSection = () => {
               Your Safety<br />Matters to Us
             </h2>
             <p style={{ color: colors.text, lineHeight: 1.8, marginBottom: "2rem", maxWidth: 380 }}>
-              We don't just list guides — we vet them. Every person on Voyara has passed our safety checks, so you can focus on the experience.
+              We don't just list guides — we vet them. Every person on Hirevoy has passed our safety checks, so you can focus on the experience.
             </p>
             <button style={{
               background: colors.primary, color: "white",
@@ -992,7 +992,7 @@ const Footer = () => (
                 <circle cx="12" cy="9" r="2.5" fill="#2d6a4f"/>
               </svg>
             </div>
-            <span className="font-display" style={{ fontSize: "1.3rem", fontWeight: 700, color: "white" }}>Voyara</span>
+            <span className="font-display" style={{ fontSize: "1.3rem", fontWeight: 700, color: "white" }}>Hirevoy</span>
           </div>
           <p style={{ fontSize: "0.84rem", lineHeight: 1.75 }}>
             Connecting travelers with verified local guides for real, unfiltered Kerala experiences.
@@ -1031,7 +1031,7 @@ const Footer = () => (
         display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem",
         fontSize: "0.8rem",
       }}>
-        <span>© 2025 Voyara. All rights reserved.</span>
+        <span>© 2025 Hirevoy. All rights reserved.</span>
         <div style={{ display: "flex", gap: "1.5rem" }}>
           {["Privacy", "Terms", "Cookies"].map(l => (
             <a key={l} href="#" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none", transition: "color 0.2s" }}
@@ -1072,7 +1072,7 @@ export default function App() {
       </main>
       <Footer />
  <a
-  href="https://wa.me/919778405403?text=Hi%20I%20found%20Voyara%20and%20want%20to%20book%20a%20guide"
+  href="https://wa.me/919778405403?text=Hi%20I%20found%20Hirevoy%20and%20want%20to%20book%20a%20guide"
   target="_blank"
   rel="noopener noreferrer"
   title="Chat on WhatsApp"
