@@ -205,3 +205,86 @@ p {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* ===== GLOBAL CARD SYSTEM ===== */
+
+.section-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.grid-3 {
+  display: grid;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+@media (min-width: 768px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* CARD */
+.card {
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.25s ease;
+
+  /* FIX */
+  color: #e5e7eb;   /* main text */
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #22c55e;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* TEXT */
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #ffffff;   /* force white */
+}
+
+.card-desc {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* BUTTON */
+.card-btn {
+  width: 100%;
+  background: #22c55e;
+  color: #000;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.card-btn:hover {
+  background: #16a34a;
+}
+
+.section-container h1 {
+  color: #ffffff;
+}
+
+.section-container p {
+  color: #cbd5e1;
+}
