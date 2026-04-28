@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import guides from "../data/guides";
 
-const openGuideChat = (guide) => {
+const handleWhatsAppClick = (guide) => {
   // Persist lead intent
   const payload = {
     guideId: guide.id,
@@ -40,7 +40,7 @@ const GuideCard = ({ guide, highlight = false, index = 0 }) => {
 
   return (
     <div
-      className="guide-card animate-fadeInUp"
+      className="guide-card"
       onClick={() => {
         if (window.gtag) {
           window.gtag('event', 'guide_click', { guide: guide.name });
@@ -49,35 +49,28 @@ const GuideCard = ({ guide, highlight = false, index = 0 }) => {
       }}
       style={{ animationDelay: `${index * 80}ms` }}
     >
-      <div className="guide-card-bg" />
-      <div className="guide-card-overlay" />
+      <h3 className="guide-name">{guide.name}</h3>
 
-      <div className="guide-card-content">
-        <h3 className="guide-card-title">{guide.name}</h3>
+      <p className="guide-meta">{languages}</p>
 
-        <p className="guide-card-meta">
-          ✓ Verified • {guide.location}
-        </p>
+      <p className="guide-price">₹{guide.price}/day</p>
 
-        <p className="guide-card-details">
-          {languages} • ₹{guide.price}/day
-        </p>
-
-        <p className="guide-card-subtext">
-          ⭐ {guide.rating} • 120+ travelers
-        </p>
-
-        <button
-          type="button"
-          className="guide-card-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            openGuideChat(guide);
-          }}
-        >
-          Chat with Guide
-        </button>
+      <div className="guide-trust">
+        <span>✓ Verified</span>
+        <span>{guide.location}</span>
+        <span>⭐ {guide.rating}</span>
+        <span>{guide.travelers || 120}+ travelers</span>
       </div>
+
+      <button
+        className="guide-btn"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleWhatsAppClick(guide);
+        }}
+      >
+        Chat with Guide
+      </button>
     </div>
   );
 };
