@@ -66,48 +66,91 @@ const Destinations = () => {
           </Link>
         </div>
 
-        <div style={{ marginBottom: "3rem", textAlign: "center" }}>
-          <h1
-            style={{
-              margin: "0 0 1rem",
-              fontSize: "clamp(2.25rem, 6vw, 3rem)",
-              lineHeight: 1.1,
-              fontWeight: "700",
-            }}
-          >
-            Explore Destinations
-          </h1>
-          <p
-            style={{
-              margin: 0,
-              color: "#94a3b8",
-              fontSize: "1.125rem",
-            }}
-          >
-            Pick a Kerala destination and find trusted local guides.
-          </p>
-        </div>
+        <div className="section-container">
+          <h1>Explore Destinations</h1>
+          <p>Pick a Kerala destination and find trusted local guides.</p>
 
-        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-          <p style={{ color: "#4ade80", fontWeight: "500" }}>
-            Limited guides available per location
-          </p>
-        </div>
+          <div className="grid-3">
 
-        <div className="destinations-grid">
-          {destinations.map((d, i) => (
-            <div key={i} className="destination-card">
-              <h3 className="destination-title">{d.name}</h3>
-              <p className="destination-desc">{d.desc}</p>
-
+            <div className="card">
+              <h2 className="card-title">Fort Kochi</h2>
+              <p className="card-desc">
+                Historic coastal area known for colonial architecture, Chinese fishing nets, and cultural streets.
+              </p>
               <button
-                className="destination-btn"
-                onClick={() => navigate(`/guides?location=${d.location}`)}
+                className="card-btn"
+                onClick={() => navigate("/guides?location=Kochi")}
               >
-                Find Guides in {d.name}
+                Find Guides
               </button>
             </div>
-          ))}
+
+            <div className="card">
+              <h2 className="card-title">Cherai Beach</h2>
+              <p className="card-desc">
+                A calm beach with shallow waters, coconut groves, and occasional dolphin sightings.
+              </p>
+              <button
+                className="card-btn"
+                onClick={() => navigate("/guides?location=Cherai")}
+              >
+                Find Guides
+              </button>
+            </div>
+
+            <div className="card">
+              <h2 className="card-title">Munnar</h2>
+              <p className="card-desc">
+                Tea plantations, misty hills, waterfalls, and cool climate perfect for nature lovers.
+              </p>
+              <button
+                className="card-btn"
+                onClick={() => navigate("/guides?location=Munnar")}
+              >
+                Find Guides
+              </button>
+            </div>
+
+            <div className="card">
+              <h2 className="card-title">Alleppey</h2>
+              <p className="card-desc">
+                Famous for houseboats, backwaters, and peaceful village life along canals.
+              </p>
+              <button
+                className="card-btn"
+                onClick={() => navigate("/guides?location=Alleppey")}
+              >
+                Find Guides
+              </button>
+            </div>
+
+            <div className="card">
+              <h2 className="card-title">Varkala</h2>
+              <p className="card-desc">
+                Cliffside beaches, cafes, sunset views, and a relaxed coastal vibe.
+              </p>
+              <button
+                className="card-btn"
+                onClick={() => navigate("/guides?location=Varkala")}
+              >
+                Find Guides
+              </button>
+            </div>
+
+            <div className="card">
+              <h2 className="card-title">Wayanad</h2>
+              <p className="card-desc">
+                Forests, waterfalls, caves, and wildlife experiences in the Western Ghats.
+              </p>
+              <button
+                className="card-btn"
+                onClick={() => navigate("/guides?location=Wayanad")}
+              >
+                Find Guides
+              </button>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

@@ -58,7 +58,6 @@ const GuideCard = ({ guide, highlight = false, index = 0 }) => {
       <div className="guide-trust">
         <span>✓ Verified</span>
         <span>{guide.location}</span>
-        <span>⭐ {guide.rating}</span>
         <span>{guide.travelers || 120}+ travelers</span>
       </div>
 
@@ -275,56 +274,30 @@ const Guides = () => {
             </button>
           </div>
         ) : (
-          <>
-            <section style={{ marginBottom: "2.5rem" }}>
-              <h2
-                style={{
-                  margin: "0 0 1rem",
-                  fontSize: "1.25rem",
-                  fontWeight: "600",
-                  color: "white",
-                }}
-              >
-                🔥 Top Picks for You
-              </h2>
+          <div className="section-container">
+            <div className="grid-3">
+              {filtered.map((guide) => (
+                <div key={guide.id} className="card">
+                  <h3 className="card-title">{guide.name}</h3>
 
-              <div className="guides-grid">
-                {topGuides.map((guide, index) => (
-                  <GuideCard
-                    key={guide.id}
-                    guide={guide}
-                    highlight
-                    index={index}
-                  />
-                ))}
-              </div>
-            </section>
+                  <p className="card-desc">
+                    {guide.location} • ₹{guide.price}/day
+                  </p>
 
-            {remainingGuides.length > 0 && (
-              <section>
-                <h2
-                  style={{
-                    margin: "0 0 1rem",
-                    fontSize: "1.25rem",
-                    fontWeight: "600",
-                    color: "white",
-                  }}
-                >
-                  More Available Guides
-                </h2>
+                  <p className="card-desc">
+                    ✓ Verified • {guide.travelers || 120}+ travelers
+                  </p>
 
-                <div className="guides-grid">
-                  {remainingGuides.map((guide, index) => (
-                    <GuideCard
-                      key={guide.id}
-                      guide={guide}
-                      index={index + topGuides.length}
-                    />
-                  ))}
+                  <button
+                    className="card-btn"
+                    onClick={() => handleWhatsAppClick(guide)}
+                  >
+                    Chat with Guide
+                  </button>
                 </div>
-              </section>
-            )}
-          </>
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </div>

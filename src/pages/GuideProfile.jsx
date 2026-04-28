@@ -133,7 +133,7 @@ Are you available? Can you suggest a plan?`;
               marginTop: "0.75rem",
             }}
           >
-            <span>⭐ {guide.rating} Rating</span>
+            <span>✓ Verified Guide</span>
             <span>120+ Travelers</span>
             <span>⏱ Responds in minutes</span>
           </div>

@@ -1571,33 +1571,25 @@ const PopularGuidesPreview = () => {
   return (
     <section className="section" style={{ background: "var(--bg)" }}>
       <div className="section-inner">
-        <h2 style={{ marginTop: "3rem" }}>Popular Guides</h2>
+        <div className="section-container">
+          <h2 style={{ marginBottom: "20px" }}>Popular Guides</h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "1rem",
-            marginTop: "1rem",
-          }}
-        >
-          {guideData.slice(0, 3).map((g) => (
-            <div
-              key={g.id}
-              onClick={() => navigate(`/guides/${g.id}`)}
-              style={{
-                padding: "1rem",
-                borderRadius: "10px",
-                background: "#1e293b",
-                color: "white",
-                cursor: "pointer",
-              }}
-            >
-              <strong>{g.name}</strong>
-              <p style={{ color: "#94a3b8" }}>{g.location}</p>
-              <p>⭐ {g.rating}</p>
-            </div>
-          ))}
+          <div className="guides-grid">
+            {guideData.slice(0, 3).map((guide) => (
+              <div key={guide.id} className="card">
+                <h3 className="card-title">{guide.name}</h3>
+                <p>{guide.location}</p>
+
+                <button
+                  className="primary-btn"
+                  style={{ width: "100%", marginTop: "14px" }}
+                  onClick={() => navigate(`/guides/${guide.id}`)}
+                >
+                  View Guide
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

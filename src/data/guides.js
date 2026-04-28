@@ -6,7 +6,7 @@ const guides = [
     price: 1500,
     language: "English",
     languages: ["English", "Malayalam"],
-    rating: 4.8,
+
     description: "Experienced local guide in Kochi.",
     verified: true,
   },
@@ -17,7 +17,7 @@ const guides = [
     price: 1200,
     language: "Malayalam",
     languages: ["Malayalam", "English"],
-    rating: 4.7,
+
     description: "Nature specialist guide in Munnar.",
     verified: true,
   },
@@ -28,7 +28,7 @@ const guides = [
     price: 1000,
     language: "English",
     languages: ["English", "Malayalam"],
-    rating: 4.6,
+
     description: "Backwater and local experience guide.",
     verified: true,
   },
