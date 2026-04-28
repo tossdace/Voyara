@@ -1,39 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import fortKochi from "../assets/destinations/fortkochi.jpg";
-import cherai from "../assets/destinations/cherai.jpg";
-import munnar from "../assets/destinations/munnar.jpg";
-import alleppey from "../assets/destinations/alleppey.jpg";
-
-const destinations = [
-  {
-    name: "Fort Kochi",
-    tag: "Heritage & Culture",
-    image: fortKochi,
-    description:
-      "Historic streets, colonial buildings, and iconic Chinese fishing nets make Fort Kochi the cultural heart of Kerala.",
-  },
-  {
-    name: "Cherai Beach",
-    tag: "Beach & Relaxation",
-    image: cherai,
-    description:
-      "A long, clean beach with calm waves—perfect for swimming, sunsets, and spotting dolphins.",
-  },
-  {
-    name: "Munnar",
-    tag: "Hills & Tea Gardens",
-    image: munnar,
-    description:
-      "Rolling tea plantations, misty hills, waterfalls, and cool weather—ideal for nature lovers.",
-  },
-  {
-    name: "Alleppey",
-    tag: "Backwaters",
-    image: alleppey,
-    description:
-      "Cruise through Kerala's famous backwaters on a houseboat and experience peaceful village life.",
-  },
-];
+import destinations from "../data/destinations";
 
 const Destinations = () => {
   const navigate = useNavigate();
@@ -74,7 +40,7 @@ const Destinations = () => {
 
           <div className="destinations-grid">
             {destinations.map((d) => (
-              <div key={d.name} className="destination-card">
+              <div key={d.id} className="destination-card">
                 <img src={d.image} alt={d.name} />
 
                 <div className="card-content">

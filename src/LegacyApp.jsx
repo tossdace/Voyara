@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import guideData from "./data/guides";
-import fort from "./assets/destinations/fortkochi.jpg";
-import cherai from "./assets/destinations/cherai.jpg";
-import munnar from "./assets/destinations/munnar.jpg";
+import destinations from "./data/destinations";
 
 const themes = {
   dark: {
@@ -130,29 +128,6 @@ const steps = [
   },
 ];
 
-const places = [
-  {
-    name: "Fort Kochi",
-    tag: "Heritage & Culture",
-    image: fort,
-    description:
-      "Historic coastal area known for colonial architecture, Chinese fishing nets, and vibrant cultural streets.",
-  },
-  {
-    name: "Cherai Beach",
-    tag: "Backwaters & Beach",
-    image: cherai,
-    description:
-      "A long, peaceful beach with shallow waters, coconut groves, and frequent dolphin sightings.",
-  },
-  {
-    name: "Munnar",
-    tag: "Hills & Tea Gardens",
-    image: munnar,
-    description:
-      "Rolling tea plantations, misty hills, waterfalls, and cool climate perfect for nature lovers.",
-  },
-];
 
 const guides = [
   {
@@ -1677,18 +1652,14 @@ const ExplorePlaces = () => {
           <div className="section-line" />
           <h2 className="font-display section-title">Explore Places</h2>
           <p className="section-copy">
-            Three of Kerala's most unforgettable destinations for a first great
+            Kerala's most unforgettable destinations, handpicked for a great
             Hirevoy experience.
           </p>
         </div>
 
         <div className="cards-grid places-grid">
-          {places.map((place, index) => (
-            <div
-              key={place.name}
-              className={`destination-card reveal delay-${(index % 3) + 1}`}
-              data-reveal
-            >
+          {destinations.map((place) => (
+            <div key={place.id} className="destination-card">
               <img src={place.image} alt={place.name} />
 
               <div className="card-content">
