@@ -4,74 +4,39 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import guideData from "./data/guides";
 import destinations from "./data/destinations";
 
-const themes = {
-  dark: {
-    bg: "#020617",
-    surface: "#0f172a",
-    card: "#1e293b",
-    text: "#e2e8f0",
-    muted: "#94a3b8",
-    accent: "#22c55e",
-    accentStrong: "#16a34a",
-    accentSoft: "rgba(34,197,94,0.12)",
-    border: "rgba(148,163,184,0.16)",
-    glass: "rgba(15,23,42,0.72)",
-    shadow: "0 10px 30px rgba(0,0,0,0.2)",
-    shadowHover: "0 18px 40px rgba(0,0,0,0.28)",
-    heroOverlay:
-      "linear-gradient(135deg, rgba(2,6,23,0.84) 0%, rgba(15,23,42,0.58) 52%, rgba(34,197,94,0.22) 100%)",
-    footerBg: "#03120a",
-    footerText: "rgba(226,232,240,0.72)",
-    footerHeading: "#f8fafc",
-    inputBg: "#0b1220",
-    inputBorder: "rgba(148,163,184,0.22)",
-    ctaBg:
-      "linear-gradient(135deg, rgba(3,18,10,0.98) 0%, rgba(15,23,42,0.98) 100%)",
-    ctaText: "#f8fafc",
-    ctaMuted: "rgba(226,232,240,0.72)",
-    ctaGhostBorder: "rgba(226,232,240,0.22)",
-    pillBg: "rgba(34,197,94,0.14)",
-    pillText: "#bbf7d0",
-    heroStatBg: "rgba(15,23,42,0.7)",
-    heroStatText: "rgba(248,250,252,0.78)",
-    ghostBg: "rgba(255,255,255,0.08)",
-    ghostBorder: "rgba(255,255,255,0.18)",
-    ghostText: "#f8fafc",
-    modalBackdrop: "rgba(2,6,23,0.72)",
-  },
-  light: {
-    bg: "#ffffff",
-    surface: "#f8fafc",
-    card: "#ffffff",
-    text: "#0f172a",
-    muted: "#475569",
-    accent: "#16a34a",
-    accentStrong: "#15803d",
-    accentSoft: "rgba(22,163,74,0.1)",
-    border: "rgba(15,23,42,0.08)",
-    glass: "rgba(255,255,255,0.78)",
-    shadow: "0 10px 30px rgba(15,23,42,0.12)",
-    shadowHover: "0 18px 40px rgba(15,23,42,0.18)",
-    heroOverlay:
-      "linear-gradient(135deg, rgba(15,23,42,0.72) 0%, rgba(15,23,42,0.36) 52%, rgba(22,163,74,0.26) 100%)",
-    footerBg: "#ecfdf5",
-    footerText: "#475569",
-    footerHeading: "#0f172a",
-    inputBg: "#ffffff",
-    inputBorder: "rgba(15,23,42,0.12)",
-    ctaBg: "linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)",
-    ctaText: "#052e16",
-    ctaMuted: "#166534",
-    ctaGhostBorder: "rgba(5,46,22,0.18)",
-    pillBg: "rgba(22,163,74,0.12)",
-    pillText: "#166534",
-    heroStatBg: "rgba(255,255,255,0.82)",
-    heroStatText: "#0f172a",
-    ghostBg: "rgba(255,255,255,0.12)",
-    ghostBorder: "rgba(255,255,255,0.28)",
-    ghostText: "#f8fafc",
-    modalBackdrop: "rgba(15,23,42,0.56)",
-  },
+const theme = {
+  bg: "#020617",
+  surface: "#0f172a",
+  card: "#1e293b",
+  text: "#e2e8f0",
+  muted: "#94a3b8",
+  accent: "#22c55e",
+  accentStrong: "#16a34a",
+  accentSoft: "rgba(34,197,94,0.12)",
+  border: "rgba(148,163,184,0.16)",
+  glass: "rgba(15,23,42,0.72)",
+  shadow: "0 10px 30px rgba(0,0,0,0.2)",
+  shadowHover: "0 18px 40px rgba(0,0,0,0.28)",
+  heroOverlay:
+    "linear-gradient(135deg, rgba(2,6,23,0.84) 0%, rgba(15,23,42,0.58) 52%, rgba(34,197,94,0.22) 100%)",
+  footerBg: "#03120a",
+  footerText: "rgba(226,232,240,0.72)",
+  footerHeading: "#f8fafc",
+  inputBg: "#0b1220",
+  inputBorder: "rgba(148,163,184,0.22)",
+  ctaBg:
+    "linear-gradient(135deg, rgba(3,18,10,0.98) 0%, rgba(15,23,42,0.98) 100%)",
+  ctaText: "#f8fafc",
+  ctaMuted: "rgba(226,232,240,0.72)",
+  ctaGhostBorder: "rgba(226,232,240,0.22)",
+  pillBg: "rgba(34,197,94,0.14)",
+  pillText: "#bbf7d0",
+  heroStatBg: "rgba(15,23,42,0.7)",
+  heroStatText: "rgba(248,250,252,0.78)",
+  ghostBg: "rgba(255,255,255,0.08)",
+  ghostBorder: "rgba(255,255,255,0.18)",
+  ghostText: "#f8fafc",
+  modalBackdrop: "rgba(2,6,23,0.72)",
 };
 
 const heroImage =
@@ -525,30 +490,6 @@ const AppStyles = ({ theme }) => (
       flex: 0 0 auto;
     }
 
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.72rem 0.95rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      transition: all 0.3s ease;
-    }
-
-    .theme-toggle:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow);
-    }
-
-    .theme-toggle__dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-soft);
-    }
 
     .nav-mobile-actions {
       display: none;
@@ -1309,19 +1250,8 @@ const LogoMark = () => (
   </div>
 );
 
-const ThemeToggle = ({ darkMode, onToggle, className = "" }) => (
-  <button
-    type="button"
-    className={`theme-toggle ${className}`.trim()}
-    onClick={onToggle}
-    aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
-  >
-    <span className="theme-toggle__dot" />
-    <span>{darkMode ? "Light" : "Dark"}</span>
-  </button>
-);
 
-const Navbar = ({ darkMode, onToggleTheme }) => {
+const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1392,7 +1322,7 @@ const Navbar = ({ darkMode, onToggleTheme }) => {
           </div>
 
           <div className="nav-actions">
-            <ThemeToggle darkMode={darkMode} onToggle={onToggleTheme} />
+
             <button
               type="button"
               className="button button-primary"
@@ -1404,7 +1334,7 @@ const Navbar = ({ darkMode, onToggleTheme }) => {
         </div>
 
         <div className="nav-mobile-actions">
-          <ThemeToggle darkMode={darkMode} onToggle={onToggleTheme} />
+
           <button
             type="button"
             className={`hamburger ${menuOpen ? "open" : ""}`}
@@ -1931,7 +1861,6 @@ const Footer = () => (
 );
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -1939,16 +1868,6 @@ export default function App() {
     message: "",
   });
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-      setDarkMode(false);
-    }
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-    }
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -1969,14 +1888,7 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
-  const theme = darkMode ? themes.dark : themes.light;
   const isFormValid = formData.name.trim() && formData.location.trim();
-
-  const handleThemeToggle = () => {
-    const nextMode = !darkMode;
-    setDarkMode(nextMode);
-    localStorage.setItem("theme", nextMode ? "dark" : "light");
-  };
 
   const handleInputChange = (field, value) => {
     setFormData((current) => ({ ...current, [field]: value }));
@@ -2027,7 +1939,7 @@ Can you share details and availability?`;
     >
       <AppStyles theme={theme} />
 
-      <Navbar darkMode={darkMode} onToggleTheme={handleThemeToggle} />
+      <Navbar />
 
       <main>
         <Hero />
