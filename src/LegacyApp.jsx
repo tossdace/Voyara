@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import guideData from "./data/guides";
 
 const themes = {
@@ -77,10 +77,10 @@ const heroImage =
   "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1800&auto=format&fit=crop";
 
 const navLinks = [
-  { label: "Home", to: "/" },
+  { label: "Home", to: "/", action: "home" },
   { label: "Destinations", to: "/destinations" },
   { label: "Guides", to: "/guides" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", to: "/", action: "contact" },
 ];
 
 const features = [
@@ -193,12 +193,6 @@ const trustItems = [
     title: "Ratings and Reviews",
     desc: "Every review comes from a real booking so trust signals stay useful instead of becoming noise.",
   },
-];
-
-const footerGroups = [
-  ["Explore", ["Destinations", "Find a Guide", "How It Works", "Safety"]],
-  ["Guides", ["Become a Guide", "Guide Dashboard", "Payouts", "Resources"]],
-  ["Company", ["About Us", "Blog", "Careers", "Contact"]],
 ];
 
 const heroStats = [
@@ -1351,6 +1345,7 @@ const ThemeToggle = ({ darkMode, onToggle, className = "" }) => (
 
 const Navbar = ({ darkMode, onToggleTheme }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -1372,32 +1367,50 @@ const Navbar = ({ darkMode, onToggleTheme }) => {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const handleNavClick = (link, event) => {
+    closeMenu();
+
+    if (link.action === "home" && location.pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (link.action === "contact") {
+      setTimeout(() => {
+        const el = document.getElementById("contact");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  };
+
   return (
     <nav className={`nav-shell ${scrolled ? "scrolled" : ""}`}>
       <div className="nav-bar glass-panel">
-        <Link to="/" className="nav-brand" onClick={closeMenu}>
+        <Link
+          to="/"
+          className="nav-brand"
+          onClick={(event) =>
+            handleNavClick({ label: "Home", to: "/", action: "home" }, event)
+          }
+        >
           <LogoMark />
           <span className="font-display nav-brand__name">Hirevoy</span>
         </Link>
 
         <div className="nav-main">
           <div className="nav-links">
-            {navLinks.map((link) =>
-              link.to ? (
-                <Link
-                  key={link.label}
-                  to={link.to}
-                  className="nav-link"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a key={link.label} href={link.href} className="nav-link">
-                  {link.label}
-                </a>
-              )
-            )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.to}
+                className="nav-link"
+                style={{ textDecoration: "none", color: "inherit" }}
+                onClick={(event) => handleNavClick(link, event)}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           <div className="nav-actions">
@@ -1430,28 +1443,17 @@ const Navbar = ({ darkMode, onToggleTheme }) => {
 
       <div className={`mobile-menu glass-panel ${menuOpen ? "open" : ""}`}>
         <div className="mobile-menu__links">
-          {navLinks.map((link) =>
-            link.to ? (
-              <Link
-                key={link.label}
-                to={link.to}
-                className="mobile-link"
-                style={{ textDecoration: "none", color: "inherit" }}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.label}
-                href={link.href}
-                className="mobile-link"
-                onClick={closeMenu}
-              >
-                {link.label}
-              </a>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              to={link.to}
+              className="mobile-link"
+              style={{ textDecoration: "none", color: "inherit" }}
+              onClick={(event) => handleNavClick(link, event)}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
         <button
           type="button"
@@ -1884,60 +1886,83 @@ const FinalCTA = () => {
 };
 
 const Footer = () => (
-  <footer id="contact" className="section footer anchor-section">
-    <div className="section-inner">
-      <div className="footer-grid">
-        <div className="footer-brand reveal" data-reveal>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.8rem",
-              marginBottom: "0.9rem",
-            }}
-          >
-            <LogoMark />
-            <span
-              className="font-display"
-              style={{ fontSize: "1.35rem", fontWeight: 700, color: "var(--footer-heading)" }}
-            >
-              Hirevoy
-            </span>
-          </div>
-          <p style={{ margin: 0, lineHeight: 1.75 }}>
-            Connecting travelers with verified local guides for real, unfiltered
-            Kerala experiences.
-          </p>
-        </div>
+  <div
+    id="contact"
+    style={{
+      marginTop: "4rem",
+      padding: "3rem 2rem",
+      background: "#020617",
+      color: "white",
+      borderTop: "1px solid rgba(255,255,255,0.08)",
+    }}
+  >
+    <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+      <h2 style={{ marginBottom: "1rem" }}>Contact Hirevoy</h2>
 
-        {footerGroups.map(([title, links], index) => (
-          <div key={title} className={`reveal delay-${(index % 3) + 1}`} data-reveal>
-            <h4 className="footer-heading">{title}</h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {links.map((link) => (
-                <li key={link} style={{ marginBottom: "0.55rem" }}>
-                  <a href="#contact" className="footer-link">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <p style={{ color: "#94a3b8", marginBottom: "1.5rem" }}>
+        Looking for a local guide or have questions? Reach out directly.
+      </p>
+
+      <p style={{ color: "#94a3b8", fontSize: "0.9rem" }}>
+        Connecting travelers with verified local guides across Kerala
+      </p>
+
+      <div style={{ marginBottom: "1.5rem" }}>
+        <p>📞 +91 9778405403</p>
+        <p>📍 Kerala, India</p>
       </div>
 
-      <div className="footer-meta">
-        <span>{new Date().getFullYear()} Hirevoy. All rights reserved.</span>
-        <div className="footer-legal">
-          {["Privacy", "Terms", "Cookies"].map((label) => (
-            <a key={label} href="#contact" className="footer-link">
-              {label}
-            </a>
-          ))}
-        </div>
+      <button
+        type="button"
+        onClick={() => {
+          const confirm = window.confirm(
+            "Continue to WhatsApp to chat with Hirevoy?"
+          );
+
+          if (!confirm) return;
+
+          const msg = "Hi! I found Hirevoy and want to know more.";
+          window.open(
+            `https://wa.me/919778405403?text=${encodeURIComponent(msg)}`
+          );
+        }}
+        onMouseEnter={(event) => {
+          event.currentTarget.style.transform = "scale(1.05)";
+        }}
+        onMouseLeave={(event) => {
+          event.currentTarget.style.transform = "scale(1)";
+        }}
+        style={{
+          padding: "12px 18px",
+          background: "linear-gradient(135deg, #22c55e, #16a34a)",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontWeight: "bold",
+          boxShadow: "0 6px 20px rgba(34,197,94,0.3)",
+          transition: "transform 0.2s ease",
+        }}
+      >
+        Chat on WhatsApp
+      </button>
+
+      <p style={{ marginTop: "1rem", color: "#94a3b8", fontSize: "0.85rem" }}>
+        Usually responds within minutes ⚡
+      </p>
+
+      <div
+        style={{
+          marginTop: "2rem",
+          borderTop: "1px solid rgba(255,255,255,0.1)",
+          paddingTop: "1rem",
+          fontSize: "0.85rem",
+          color: "#94a3b8",
+        }}
+      >
+        © 2026 Hirevoy — Explore Kerala with local guides
       </div>
     </div>
-  </footer>
+  </div>
 );
 
 export default function App() {
