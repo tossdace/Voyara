@@ -34,9 +34,8 @@ Can you share details and availability?`;
   );
 };
 
-const GuideCard = ({ guide, highlight = false, index = 0 }) => {
+const GuideCard = ({ guide, index = 0 }) => {
   const navigate = useNavigate();
-  const languages = guide.languages?.join(", ") || guide.language;
 
   return (
     <div
@@ -75,6 +74,7 @@ const GuideCard = ({ guide, highlight = false, index = 0 }) => {
 };
 
 const Guides = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const locationFilter = searchParams.get("location") || "";
   const [search, setSearch] = useState(() => locationFilter);
@@ -115,9 +115,6 @@ const Guides = () => {
       (language === "" || guide.language === language)
     );
   });
-
-  const topGuides = filtered.slice(0, 2);
-  const remainingGuides = filtered.slice(2);
 
   if (loading) {
     return (
