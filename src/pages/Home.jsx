@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AnimatePresence,
@@ -7,14 +7,16 @@ import {
 import {
   ArrowRight,
   BadgeCheck,
+  CircleHelp,
   Compass,
+  Flag,
   Languages,
+  Mail,
   Menu,
   MapPin,
   MapPinned,
   MessageCircle,
   Mountain,
-  PhoneCall,
   ShieldCheck,
   WalletCards,
   X,
@@ -31,6 +33,10 @@ import varkalaImage from "../assets/destinations/varkala.jpg";
 import wayanadImage from "../assets/destinations/wayanad.jpg";
 
 const WHATSAPP_NUMBER = "919778405403";
+const SUPPORT_EMAIL_URL =
+  "mailto:dhyan102006@gmail.com?subject=Hirevoy%20Problem%20Report";
+const SUPPORT_WHATSAPP_URL =
+  "https://wa.me/919400000000?text=Hi%20Hirevoy%2C%20I%20need%20help";
 
 const destinations = [
   {
@@ -174,19 +180,16 @@ const getGuideCount = (destination) => {
   }).length;
 };
 
-const openHirevoyWhatsApp = () => {
-  const message =
-    "Hi! I found Hirevoy and want to explore Kerala with a trusted local guide.";
-
+const openSupportWhatsApp = () => {
   if (window.gtag) {
-    window.gtag("event", "whatsapp_click", { source: "homepage" });
+    window.gtag("event", "whatsapp_click", { source: "support" });
   }
 
-  window.open(
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
-    "_blank",
-    "noopener,noreferrer",
-  );
+  window.open(SUPPORT_WHATSAPP_URL, "_blank", "noopener,noreferrer");
+};
+
+const openSupportEmail = () => {
+  window.open(SUPPORT_EMAIL_URL, "_blank", "noopener,noreferrer");
 };
 
 const openGuideWhatsApp = (guide) => {
@@ -283,6 +286,31 @@ const SectionHeading = ({ eyebrow, title, children, align = "center" }) => (
       </p>
     ) : null}
   </Motion.div>
+);
+
+const WhatsAppIcon = ({ className = "" }) => (
+  <svg
+    aria-hidden="true"
+    className={className}
+    fill="currentColor"
+    viewBox="0 0 32 32"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M16.02 3.2C8.94 3.2 3.2 8.93 3.2 16c0 2.42.68 4.68 1.85 6.61L3.6 28.8l6.35-1.42a12.7 12.7 0 0 0 6.07 1.54c7.08 0 12.82-5.73 12.82-12.8C28.84 8.93 23.1 3.2 16.02 3.2Zm0 23.54c-2.03 0-3.91-.56-5.52-1.54l-.39-.23-3.74.84.85-3.64-.25-.4A10.55 10.55 0 0 1 5.39 16c0-5.86 4.76-10.62 10.63-10.62 5.88 0 10.64 4.76 10.64 10.62 0 5.88-4.76 10.64-10.64 10.64Zm5.85-7.95c-.32-.16-1.89-.93-2.18-1.04-.3-.11-.51-.16-.73.16-.22.32-.84 1.04-1.03 1.26-.19.21-.38.24-.7.08-.32-.16-1.36-.5-2.59-1.59a9.71 9.71 0 0 1-1.79-2.23c-.19-.32-.02-.49.14-.65.15-.15.32-.38.49-.57.16-.19.21-.32.32-.54.11-.21.05-.4-.03-.57-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.21 0-.57.08-.86.4-.3.32-1.13 1.1-1.13 2.69 0 1.59 1.16 3.12 1.32 3.34.16.21 2.28 3.48 5.52 4.88.77.33 1.37.53 1.84.68.77.25 1.48.21 2.04.13.62-.09 1.89-.77 2.16-1.51.27-.74.27-1.38.19-1.51-.08-.13-.3-.21-.62-.38Z" />
+  </svg>
+);
+
+const SupportAction = ({ children, icon: Icon, onClick }) => (
+  <button
+    className="flex w-full items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.045] px-4 py-3 text-left text-sm font-semibold text-[#f8fafc] transition hover:border-[#22c55e]/35 hover:bg-white/[0.08]"
+    onClick={onClick}
+    type="button"
+  >
+    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#22c55e]/12 text-[#86efac]">
+      {Icon ? <Icon aria-hidden="true" className="h-4 w-4" /> : null}
+    </span>
+    {children}
+  </button>
 );
 
 const Navbar = () => {
@@ -796,18 +824,34 @@ const Footer = () => (
       </div>
 
       <div>
-        <h3 className="font-bold text-[#f8fafc]">Contact</h3>
+        <h3 className="font-bold text-[#f8fafc]">Support</h3>
         <p className="mt-4 flex items-center gap-2 text-sm text-[#cbd5e1]">
           <MapPin aria-hidden="true" className="h-4 w-4 text-[#22c55e]" />
           Kerala, India
         </p>
         <PrimaryButton
           className="mt-5 w-full sm:w-auto"
-          icon={PhoneCall}
-          onClick={openHirevoyWhatsApp}
+          icon={WhatsAppIcon}
+          onClick={openSupportWhatsApp}
         >
-          WhatsApp Contact
+          WhatsApp Support
         </PrimaryButton>
+        <div className="mt-3 flex flex-wrap gap-3 text-sm text-[#cbd5e1]">
+          <button
+            className="transition hover:text-[#22c55e]"
+            onClick={openSupportEmail}
+            type="button"
+          >
+            Report Problem
+          </button>
+          <button
+            className="transition hover:text-[#22c55e]"
+            onClick={openSupportEmail}
+            type="button"
+          >
+            Email Support
+          </button>
+        </div>
       </div>
 
       <p className="border-t border-white/10 pt-5 text-sm text-[#94a3b8] md:col-span-3">
@@ -817,16 +861,107 @@ const Footer = () => (
   </footer>
 );
 
-const WhatsAppFab = () => (
-  <button
-    aria-label="Chat with Hirevoy on WhatsApp"
-    className="fixed bottom-4 right-4 z-50 grid h-12 w-12 place-items-center rounded-full bg-[#22c55e] text-[#020617] shadow-[0_14px_34px_rgba(34,197,94,0.32)] transition hover:-translate-y-0.5 hover:bg-[#4ade80] sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
-    onClick={openHirevoyWhatsApp}
-    type="button"
-  >
-    <MessageCircle aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6" />
-  </button>
-);
+const SupportWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const longPressTimer = useRef(null);
+  const longPressTriggered = useRef(false);
+
+  const clearLongPress = () => {
+    if (longPressTimer.current) {
+      window.clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  };
+
+  const startLongPress = (event) => {
+    if (event.pointerType === "mouse") return;
+
+    longPressTriggered.current = false;
+    clearLongPress();
+    longPressTimer.current = window.setTimeout(() => {
+      longPressTriggered.current = true;
+      setIsOpen(true);
+    }, 560);
+  };
+
+  const handleWhatsAppClick = () => {
+    if (longPressTriggered.current) {
+      longPressTriggered.current = false;
+      return;
+    }
+
+    openSupportWhatsApp();
+  };
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50 flex items-end gap-2 sm:bottom-5 sm:right-5">
+      <AnimatePresence>
+        {isOpen ? (
+          <Motion.div
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            className="absolute bottom-16 right-0 w-[min(19rem,calc(100vw-2rem))] rounded-[1.5rem] border border-white/[0.1] bg-[#020617]/88 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.42)] backdrop-blur-2xl sm:bottom-[4.5rem]"
+            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+          >
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <div>
+                <h3 className="text-base font-extrabold text-[#f8fafc]">
+                  Need help?
+                </h3>
+                <p className="mt-1 text-sm leading-6 text-[#cbd5e1]">
+                  Report a problem or contact support.
+                </p>
+              </div>
+              <button
+                aria-label="Close support menu"
+                className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/[0.08] bg-white/[0.05] text-[#cbd5e1] transition hover:border-[#22c55e]/35 hover:text-[#f8fafc]"
+                onClick={() => setIsOpen(false)}
+                type="button"
+              >
+                <X aria-hidden="true" className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="grid gap-2">
+              <SupportAction icon={Flag} onClick={openSupportEmail}>
+                Report Problem
+              </SupportAction>
+              <SupportAction icon={Mail} onClick={openSupportEmail}>
+                Email Support
+              </SupportAction>
+              <SupportAction icon={WhatsAppIcon} onClick={openSupportWhatsApp}>
+                WhatsApp Support
+              </SupportAction>
+            </div>
+          </Motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      <button
+        aria-label="Open support menu"
+        className="grid h-10 w-10 place-items-center rounded-full border border-white/[0.1] bg-[#020617]/78 text-[#d8e1ed] shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-xl transition hover:scale-105 hover:border-[#22c55e]/40 hover:text-[#86efac]"
+        onClick={() => setIsOpen((current) => !current)}
+        type="button"
+      >
+        <CircleHelp aria-hidden="true" className="h-5 w-5" />
+      </button>
+
+      <button
+        aria-label="Chat on WhatsApp"
+        className="grid h-12 w-12 place-items-center rounded-full bg-[linear-gradient(135deg,#25d366,#128c7e)] text-white shadow-[0_14px_34px_rgba(37,211,102,0.34)] transition hover:scale-105 hover:shadow-[0_18px_44px_rgba(37,211,102,0.42)] active:scale-95 sm:h-14 sm:w-14"
+        onClick={handleWhatsAppClick}
+        onPointerCancel={clearLongPress}
+        onPointerDown={startLongPress}
+        onPointerLeave={clearLongPress}
+        onPointerUp={clearLongPress}
+        type="button"
+      >
+        <WhatsAppIcon className="h-6 w-6 sm:h-7 sm:w-7" />
+      </button>
+    </div>
+  );
+};
 
 const Home = () => {
   return (
@@ -841,7 +976,7 @@ const Home = () => {
         <FinalCTA />
       </main>
       <Footer />
-      <WhatsAppFab />
+      <SupportWidget />
     </div>
   );
 };
