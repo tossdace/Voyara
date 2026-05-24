@@ -35,8 +35,7 @@ import wayanadImage from "../assets/destinations/wayanad.jpg";
 const WHATSAPP_NUMBER = "919778405403";
 const SUPPORT_EMAIL_URL =
   "mailto:dhyan102006@gmail.com?subject=Hirevoy%20Problem%20Report";
-const SUPPORT_WHATSAPP_URL =
-  "https://wa.me/919400000000?text=Hi%20Hirevoy%2C%20I%20need%20help";
+const SUPPORT_WHATSAPP_URL = "https://wa.me/919495177713";
 
 const destinations = [
   {
